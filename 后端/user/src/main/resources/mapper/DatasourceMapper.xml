@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.proinnova.user.dao.DatasourceDao">
+    <select id="getDatasourceByUserId" resultType="cn.com.proinnova.user.bean.Datasource">
+        SELECT datasource.* FROM user_info
+        LEFT JOIN datasource ON user_info.tenant_code = datasource.tenant_code
+        WHERE user_info.user_id= #{userId}
+    </select>
+</mapper>

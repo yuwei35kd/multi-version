@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.proinnova.user.dao.UserDao">
+    <select id="findUser" resultType="cn.com.proinnova.user.bean.User">
+        select user_id,user_name,user_info.tenant_code,tenant_version.version from user_info
+        left join tenant_version on user_info.tenant_code = tenant_version.tenant_code
+        where user_name = #{userName} and pwd = #{pwd} and user_info.tenant_code = #{tenantCode}
+    </select>
+</mapper>

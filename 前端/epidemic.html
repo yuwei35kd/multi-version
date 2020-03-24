@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>疫情状况</title>
+        <link href="favicon.ico" rel="shortcut icon" />
+        <link href="/css/main.css" rel="stylesheet">
+        <script type="text/javascript" src="/js/main.js"></script>
+        <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript"
+            src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.js"></script>
+    </head>
+
+    <body>
+        <h1 id="versionNo" style="margin-left:100px;"></h1>
+        <!-- 国内疫情 -->
+        <table width="90%" class="table">
+            <caption>
+                <h2>疫情情况</h2>
+            </caption>
+            <thead>
+                <tr id="thead-tr">
+                    <th>省份</th>
+                    <th>现存确诊</th>
+                    <th>累积确诊</th>
+                    <th>新增</th>
+                    <th>累积治愈</th>
+                </tr>
+            </thead>
+            <tbody id="tableList">
+
+            </tbody>
+        </table>
+
+        <!-- 国外疫情 -->
+        <table width="90%" class="table" style="display: none;" id="abraodTable">
+            <caption>
+                <h2>国外疫情情况</h2>
+            </caption>
+            <thead>
+                <tr>
+                    <th>国家</th>
+                    <th>现存确诊</th>
+                    <th>累积确诊</th>
+                    <th>新增</th>
+                    <th>累积治愈</th>
+                    <th>死亡人数</th>
+                </tr>
+            </thead>
+            <tbody id="abraodTableList">
+
+            </tbody>
+        </table>
+        <!-- 列表模板1.0 -->
+        <script id="table-template" type="text/x-handlebars-template"> 
+            {{#each this}}      
+            <tr>
+                <td>{{provinnce}}</td>
+                <td>{{xcqz}}</td>
+                <td>{{ljqz}}</td>
+                <td>{{xz}}</td>
+                <td>{{ljzy}}</td>
+            </tr>
+            {{/each}}
+        </script>
+        <!-- 2.0以后通用 -->
+        <script id="table-template-2" type="text/x-handlebars-template"> 
+            {{#each this}}      
+            <tr>
+                <td>{{provinnce}}</td>
+                <td>{{xcqz}}</td>
+                <td>{{ljqz}}</td>
+                <td>{{xz}}</td>
+                <td>{{ljzy}}</td>
+                {{#if flag}}
+                <td class="redline">{{dead}}</td>
+                {{else}}
+                <td>{{dead}}</td>
+                {{/if}}
+            </tr>
+            {{/each}}
+        </script>
+        <!-- 国外疫情列表 -->
+        <script id="abraod-table-template" type="text/x-handlebars-template"> 
+            {{#each this}}      
+            <tr>
+                <td>{{nation}}</td>
+                <td>{{xcqz}}</td>
+                <td>{{ljqz}}</td>
+                <td>{{xz}}</td>
+                <td>{{ljzy}}</td>
+                <td>{{dead}}</td>
+            </tr>
+            {{/each}}
+        </script>
+    </body>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // 获取url中的变量
+            function getQueryVariable(variable){
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i=0;i<vars.length;i++) {
+                        var pair = vars[i].split("=");
+                        if(pair[0] == variable){return pair[1];}
+                }
+                return(false);
+            }
+            // 用户id
+            var userId = getQueryVariable("userId");
+            var versionNo;
+            $.ajax({
+                type : "GET",
+                contentType: "application/json;charset=UTF-8",
+                url : "http://localhost:8800/user/version?userId="+userId,
+                data : "",
+                async:false,
+                success : function(result) {
+                    versionNo = result;
+                    $("#versionNo").html(result);
+                },
+                error : function(e){
+                }   
+            });
+            
+            // 2.0增加了死亡人数
+            if(versionNo == "2.0"){
+                $("#thead-tr").append("<th>死亡人数</th>");
+                $.ajax({
+                    type : "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    url : "http://localhost:8800/epidemic/list?userId="+userId,
+                    data : "",
+                    success : function(result) {
+                        var myTemplate = Handlebars.compile($("#table-template-2").html());
+                        render(myTemplate,result,"tableList");
+                    },
+                    error : function(e){
+                    }   
+                });
+            } else if(versionNo == "3.0" || versionNo == "4.0"){
+                $("#thead-tr").append("<th>死亡人数</th>");
+                $.ajax({
+                    type : "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    url : "http://localhost:8800/epidemic/list/3?userId="+userId,
+                    data : "",
+                    success : function(result) {
+                        var myTemplate = Handlebars.compile($("#table-template-2").html());
+                        render(myTemplate,result,"tableList");
+                    },
+                    error : function(e){
+                    }   
+                });
+            } else{
+                $.ajax({
+                    type : "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    url : "http://localhost:8800/epidemic/list?userId="+userId,
+                    data : "",
+                    success : function(result) {
+                        var myTemplate = Handlebars.compile($("#table-template").html());
+                        render(myTemplate,result,"tableList");
+                    },
+                    error : function(e){
+                    }   
+                });
+            }
+
+            // 国外疫情
+            if(versionNo == "4.0"){
+                $("#abraodTable").css("display","table");
+                $.ajax({
+                    type : "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    url : "http://localhost:8800/epidemic/abraod/list?userId="+userId,
+                    data : "", 
+                    success : function(result) {
+                        var myTemplate = Handlebars.compile($("#abraod-table-template").html());
+                        render(myTemplate,result,"abraodTableList");
+                    },
+                    error : function(e){
+                    }   
+                });
+            }
+            
+        });
+    </script>
+</html>
