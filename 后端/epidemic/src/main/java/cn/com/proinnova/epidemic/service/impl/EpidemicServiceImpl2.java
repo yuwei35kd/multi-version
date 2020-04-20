@@ -2,6 +2,7 @@ package cn.com.proinnova.epidemic.service.impl;
 
 import cn.com.proinnova.epidemic.MyVersion;
 import cn.com.proinnova.epidemic.bean.Epidemic;
+import cn.com.proinnova.epidemic.config.ThreadLocalSysVal;
 import cn.com.proinnova.epidemic.dao.EpidemicDao;
 import cn.com.proinnova.epidemic.service.EpidemicService;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +22,7 @@ public class EpidemicServiceImpl2 implements EpidemicService {
 
     @Override
     public List<Epidemic> list() {
-        List<Epidemic> epidemicList = epidemicDao.listAddedDead();
+        List<Epidemic> epidemicList = epidemicDao.listAddedDead(ThreadLocalSysVal.get().getApp());
         setFlag(epidemicList);
         return epidemicList;
     }

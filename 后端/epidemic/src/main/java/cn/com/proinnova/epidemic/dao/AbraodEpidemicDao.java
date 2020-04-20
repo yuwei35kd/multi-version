@@ -5,5 +5,5 @@ import cn.com.proinnova.epidemic.bean.AbraodEpidemic;
 import java.util.List;
 
 public interface AbraodEpidemicDao {
-    List<AbraodEpidemic> list();
+    List<AbraodEpidemic> list(Integer app);
 }

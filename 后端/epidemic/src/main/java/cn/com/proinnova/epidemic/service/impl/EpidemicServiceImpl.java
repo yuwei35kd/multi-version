@@ -1,6 +1,7 @@
 package cn.com.proinnova.epidemic.service.impl;
 
 import cn.com.proinnova.epidemic.bean.Epidemic;
+import cn.com.proinnova.epidemic.config.ThreadLocalSysVal;
 import cn.com.proinnova.epidemic.dao.EpidemicDao;
 import cn.com.proinnova.epidemic.service.EpidemicService;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class EpidemicServiceImpl implements EpidemicService {
 
     @Override
     public List<Epidemic> list() {
-        return epidemicDao.list();
+        return epidemicDao.list(ThreadLocalSysVal.get().getApp());
     }
 
 }

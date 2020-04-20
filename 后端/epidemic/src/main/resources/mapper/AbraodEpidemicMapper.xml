@@ -3,6 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.proinnova.epidemic.dao.AbraodEpidemicDao">
     <select id="list" resultType="cn.com.proinnova.epidemic.bean.AbraodEpidemic">
-        select nation,xcqz,ljqz,xz,ljzy,dead from abroad_epidemic
+        select nation,xcqz,ljqz,xz,ljzy,dead from #{app}_abroad_epidemic
     </select>
 </mapper>

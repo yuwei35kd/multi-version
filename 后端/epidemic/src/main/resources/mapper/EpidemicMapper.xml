@@ -3,14 +3,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.proinnova.epidemic.dao.EpidemicDao">
     <select id="list" resultType="cn.com.proinnova.epidemic.bean.Epidemic">
-        select provinnce,xcqz,ljqz,xz,ljzy from epidemic
+        select provinnce,xcqz,ljqz,xz,ljzy from #{app}_epidemic
     </select>
 
     <select id="listAddedDead" resultType="cn.com.proinnova.epidemic.bean.Epidemic">
-        select provinnce,xcqz,ljqz,xz,ljzy,dead from epidemic order by xcqz desc
+        select provinnce,xcqz,ljqz,xz,ljzy,dead from #{app}_epidemic order by xcqz desc
     </select>
 
     <select id="listAddedDeadTop" resultType="cn.com.proinnova.epidemic.bean.Epidemic">
-        select provinnce,xcqz,ljqz,xz,ljzy,dead from epidemic order by xcqz desc limit #{top}
+        select provinnce,xcqz,ljqz,xz,ljzy,dead from #{app}_epidemic order by xcqz desc limit #{top}
+    </select>
+
+    <select id="listAddedDeadTop2" resultType="cn.com.proinnova.epidemic.bean.Epidemic">
+        select provinnce,xcqz,ljqz,xz,ljzy,dead from #{app}_epidemic order by xcqz desc limit 3
     </select>
 </mapper>
