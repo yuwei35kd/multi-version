@@ -1,5 +1,6 @@
 package cn.com.proinnova.epidemic.service.impl;
 
+import cn.com.proinnova.epidemic.CodeVersion;
 import cn.com.proinnova.epidemic.bean.Epidemic;
 import cn.com.proinnova.epidemic.config.ThreadLocalSysVal;
 import cn.com.proinnova.epidemic.dao.EpidemicDao;

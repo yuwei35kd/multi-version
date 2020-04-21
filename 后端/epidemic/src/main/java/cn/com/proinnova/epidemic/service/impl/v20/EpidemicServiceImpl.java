@@ -1,6 +1,6 @@
-package cn.com.proinnova.epidemic.service.impl;
+package cn.com.proinnova.epidemic.service.impl.v20;
 
-import cn.com.proinnova.epidemic.MyVersion;
+import cn.com.proinnova.epidemic.CodeVersion;
 import cn.com.proinnova.epidemic.bean.Epidemic;
 import cn.com.proinnova.epidemic.config.ThreadLocalSysVal;
 import cn.com.proinnova.epidemic.dao.EpidemicDao;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("EpidemicService2")
-@MyVersion(version = "2.0")
-public class EpidemicServiceImpl2 implements EpidemicService {
+@Service("EpidemicService2.0")
+@CodeVersion(version = "2.0")
+public class EpidemicServiceImpl implements EpidemicService {
     @Value("${deadnum}")
     private Integer deadNum;
 

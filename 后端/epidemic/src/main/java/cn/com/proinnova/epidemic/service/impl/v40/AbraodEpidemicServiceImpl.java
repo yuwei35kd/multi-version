@@ -1,9 +1,8 @@
-package cn.com.proinnova.epidemic.service.impl;
+package cn.com.proinnova.epidemic.service.impl.v40;
 
 import cn.com.proinnova.epidemic.bean.AbraodEpidemic;
 import cn.com.proinnova.epidemic.config.ThreadLocalSysVal;
 import cn.com.proinnova.epidemic.dao.AbraodEpidemicDao;
-import cn.com.proinnova.epidemic.service.AbraodEpidemicService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

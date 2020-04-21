@@ -109,11 +109,12 @@
             }
             // 用户id
             var userId = getQueryVariable("userId");
+            var app = getQueryVariable("app");
             var versionNo;
             $.ajax({
                 type : "GET",
                 contentType: "application/json;charset=UTF-8",
-                url : "http://localhost:8800/user/version?userId="+userId,
+                url : "http://localhost:8800/user/version?userId="+userId+"&app="+app,
                 data : "",
                 async:false,
                 success : function(result) {
@@ -130,7 +131,7 @@
                 $.ajax({
                     type : "GET",
                     contentType: "application/json;charset=UTF-8",
-                    url : "http://localhost:8800/epidemic/list?userId="+userId,
+                    url : "http://localhost:8800/epidemic/list?userId="+userId+"&app="+app,
                     data : "",
                     success : function(result) {
                         var myTemplate = Handlebars.compile($("#table-template-2").html());
@@ -144,7 +145,7 @@
                 $.ajax({
                     type : "GET",
                     contentType: "application/json;charset=UTF-8",
-                    url : "http://localhost:8800/epidemic/list/3?userId="+userId,
+                    url : "http://localhost:8800/epidemic/list/3?userId="+userId+"&app="+app,
                     data : "",
                     success : function(result) {
                         var myTemplate = Handlebars.compile($("#table-template-2").html());
@@ -157,7 +158,7 @@
                 $.ajax({
                     type : "GET",
                     contentType: "application/json;charset=UTF-8",
-                    url : "http://localhost:8800/epidemic/list?userId="+userId,
+                    url : "http://localhost:8800/epidemic/list?userId="+userId+"&app="+app,
                     data : "",
                     success : function(result) {
                         var myTemplate = Handlebars.compile($("#table-template").html());
@@ -174,7 +175,7 @@
                 $.ajax({
                     type : "GET",
                     contentType: "application/json;charset=UTF-8",
-                    url : "http://localhost:8800/epidemic/abraod/list?userId="+userId,
+                    url : "http://localhost:8800/epidemic/abraod/list?userId="+userId+"&app="+app,
                     data : "", 
                     success : function(result) {
                         var myTemplate = Handlebars.compile($("#abraod-table-template").html());

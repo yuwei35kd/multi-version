@@ -1,4 +1,4 @@
-package cn.com.proinnova.epidemic.service;
+package cn.com.proinnova.epidemic.service.impl.v40;
 
 import cn.com.proinnova.epidemic.bean.AbraodEpidemic;
 

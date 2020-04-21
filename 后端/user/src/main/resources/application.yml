@@ -12,4 +12,4 @@ mybatis:
     map-underscore-to-camel-case: true
 logging:
   level:
-    com.proinnova.user.dao: debug
+    cn.com.proinnova.user.dao: debug

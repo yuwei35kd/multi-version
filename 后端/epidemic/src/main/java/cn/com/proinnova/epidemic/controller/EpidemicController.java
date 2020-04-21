@@ -20,7 +20,7 @@ public class EpidemicController {
     @GetMapping("/list")
     public List<Epidemic> list(){
         String version = ThreadLocalSysVal.get().getVersion();
-        EpidemicService epidemicService = SpringBeanUtils.getService(version,EpidemicService.class);
+        EpidemicService epidemicService = SpringBeanUtils.getService(version, EpidemicService.class);
         return epidemicService.list();
     }
 

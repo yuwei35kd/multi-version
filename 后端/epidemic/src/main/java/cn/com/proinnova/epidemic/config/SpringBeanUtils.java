@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import cn.com.proinnova.epidemic.MyVersion;
+import cn.com.proinnova.epidemic.CodeVersion;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.beans.BeansException;
@@ -14,6 +14,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+/**
+ * 获取不同版本Bean工具类
+ */
 @Component
 public class SpringBeanUtils implements ApplicationContextAware {
     private static List<String> versionList = Lists.newArrayList("4.0", "3.0", "2.0");
@@ -72,7 +75,7 @@ public class SpringBeanUtils implements ApplicationContextAware {
             Iterator<Entry<String, T>> iterator = entrySet.iterator();
             while (iterator.hasNext()) {
                 Object interfaceServiceImpl = iterator.next().getValue();
-                MyVersion myVersion = interfaceServiceImpl.getClass().getAnnotation(MyVersion.class);
+                CodeVersion myVersion = interfaceServiceImpl.getClass().getAnnotation(CodeVersion.class);
                 if (null != myVersion) {
                     String version = myVersion.version();
                     versionBeanMap.put(version, interfaceServiceImpl);

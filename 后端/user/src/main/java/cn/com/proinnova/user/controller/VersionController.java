@@ -18,7 +18,7 @@ public class VersionController {
      * @return
      */
     @GetMapping("/version")
-    public String getVersion(Integer userId){
-        return versionService.getVersion(userId);
+    public String getVersion(Integer userId, Integer app) {
+        return versionService.getVersion(userId, app);
     }
 }

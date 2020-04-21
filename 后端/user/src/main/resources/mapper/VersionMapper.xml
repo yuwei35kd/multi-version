@@ -4,7 +4,8 @@
 <mapper namespace="cn.com.proinnova.user.dao.VersionDao">
     <select id="getVersion" resultType="String">
         SELECT version FROM user_info
-        LEFT JOIN tenant_version ON tenant_version.tenant_code = user_info.tenant_code
+        LEFT JOIN tenant_app_version ON tenant_app_version.tenant_code = user_info.tenant_code
+        and tenant_app_version.app = #{app}
         WHERE user_info.user_id = #{userId}
     </select>
 </mapper>

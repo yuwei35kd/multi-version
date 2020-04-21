@@ -18,7 +18,7 @@ public class VersionServiceImpl implements VersionService {
      * @return
      */
     @Override
-    public String getVersion(Integer userId) {
-        return versionDao.getVersion(userId);
+    public String getVersion(Integer userId, Integer app) {
+        return versionDao.getVersion(userId, app);
     }
 }

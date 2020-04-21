@@ -28,10 +28,9 @@ public class Interceptor implements HandlerInterceptor {
         bean.setDriverClassName(datasource.getDriverClass());
         DataSourceHolder.setDataSource(bean);
 
-        Integer app = Integer.parseInt(request.getParameter("userId"));
-
+        Integer app = Integer.parseInt(request.getParameter("app"));
         //获取版本
-        String version = new RestTemplate().getForObject("http://localhost:8800/user/version?userId=" + userId, String.class);
+        String version = new RestTemplate().getForObject("http://localhost:8800/user/version?userId=" + userId+"&app="+app, String.class);
         ThreadLocalSysVal.put(new ThreadLocalSysVal.SysVal(userId, version, app));
         return true;
     }
